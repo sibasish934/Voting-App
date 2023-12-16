@@ -9,12 +9,12 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/group.name: service-group
     alb.ingress.kubernetes.io/subnets: subnet-0bc2bbd167843fed8, subnet-0a56e9714acf59227,subnet-0b1a5cc3fcfc71686
-    external-dns.alpha.kubernetes.io/hostname: backend.laundrytech.xyz
+    external-dns.alpha.kubernetes.io/hostname: <your-backend-domain>
   labels:
     role: api
 spec:
   rules:
-    - host: "backend.laundrytech.xyz"
+    - host: "<your-backend-domain>"
       http:
           paths:
             - path: /
