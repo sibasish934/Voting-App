@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend-ingress
+  namespace: cloudchamp
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/group.name: service-group
+    alb.ingress.kubernetes.io/subnets: subnet-0bc2bbd167843fed8, subnet-0a56e9714acf59227,subnet-0b1a5cc3fcfc71686
+    external-dns.alpha.kubernetes.io/hostname: app.laundrytech.xyz
+  labels:
+    role: frontend
+spec:
+  rules:
+    - host: "app.laundrytech.xyz"
+      http:
+          paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: frontend
+                  port:
+                    number: 8080
